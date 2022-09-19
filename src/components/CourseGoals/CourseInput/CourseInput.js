@@ -6,10 +6,14 @@ import "./CourseInput.css";
 const CourseInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [errMsg, setErrmsg] = useState("");
 
   const goalInputChangeHandler = (event) => {
     if (event.target.value.trim().length > 0) {
       setIsValid(true);
+      setErrmsg("");
+    } else {
+      setErrmsg("Please enter a valid name");
     }
     setEnteredValue(event.target.value);
   };
@@ -28,6 +32,7 @@ const CourseInput = (props) => {
       <div className={`form-control ${!isValid ? "inValid" : ""}`}>
         <label>Course Goal</label>
         <input type="text" onChange={goalInputChangeHandler} />
+        <div style={{ color: "red" }}>{errMsg}</div>
       </div>
       <Button type="submit" isValid={isValid}>
         Add Goal
